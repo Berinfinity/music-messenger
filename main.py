@@ -33,6 +33,40 @@ def show_welcome():
     sleep(2)
     input("Press ENTER to begin your journey...")
 
+def choose_music_path():
+
+    options = {
+        "1": "universe",
+        "2": "genre",
+        "3": "artist",
+        "4": "album",
+        "5": "exit"
+    }
+
+    while True:
+
+        print("=" * 48)
+        print("How would you like to receive")
+        print("your musical message?")
+        print("=" * 48)
+        print()
+
+        print("1. Let the Universe Choose")
+        print("2. Choose a Genre")
+        print("3. Choose an Artist")
+        print("4. Choose an Album")
+        print("5. End the Journey")
+        print()
+
+        choice = input("Enter your choice (1-5): ").strip()
+
+        if choice in options:
+            return options[choice]
+
+        print()
+        print("The universe couldn't understand your choice.")
+        print("Please enter a number between 1 and 5.\n")
+
 
 def main():
     show_welcome()
@@ -43,7 +77,11 @@ def main():
 
     print()
     print("A melody is searching for you...")
-    sleep(1.5)
+    sleep(2)
+
+    choice = choose_music_path()
+    print()
+    print(f"Selected option: {choice}")
 
 
 if __name__ == "__main__":
