@@ -105,3 +105,66 @@ class SpotifyClient:
             "artist": song["artists"][0]["name"],
             "genre": path
         }
+
+    def discover_by_genre(self, genre):
+
+        results = self.spotify.search(
+            q=genre,
+            type="track",
+            limit=10
+        )
+
+        tracks = results["tracks"]["items"]
+
+        if not tracks:
+            return None
+
+        song = random.choice(tracks)
+
+        return {
+            "name": song["name"],
+            "artist": song["artists"][0]["name"],
+            "genre": genre
+        }
+
+    def discover_by_artist(self, artist):
+
+        results = self.spotify.search(
+            q=f"artist:{artist}",
+            type="track",
+            limit=10
+        )
+
+        tracks = results["tracks"]["items"]
+
+        if not tracks:
+            return None
+
+        song = random.choice(tracks)
+
+        return {
+            "name": song["name"],
+            "artist": song["artists"][0]["name"],
+            "genre": "Artist Journey"
+        }
+
+    def discover_by_album(self, album):
+
+        results = self.spotify.search(
+            q=f"album:{album}",
+            type="track",
+            limit=10
+        )
+
+        tracks = results["tracks"]["items"]
+
+        if not tracks:
+            return None
+
+        song = random.choice(tracks)
+
+        return {
+            "name": song["name"],
+            "artist": song["artists"][0]["name"],
+            "genre": "Album Journey"
+        }

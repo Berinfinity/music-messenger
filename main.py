@@ -72,29 +72,39 @@ def choose_music_path():
 def main():
     show_welcome()
 
-    print()
-    print("Listening to the echoes of the universe...")
-    sleep(2)
-
-    choice = choose_music_path()
-
-    if choice == "exit":
+    while True:
         print()
-        print("May the universe guide your next journey.")
-        return
+        print("Listening to the echoes of the universe...")
+        sleep(2)
 
-    print()
-    print("The universe is listening...")
-    sleep(2)
+        choice = choose_music_path()
 
-    print("Searching beyond the harmony...")
-    sleep(2)
+        if choice == "exit":
+            print()
+            print("May the universe guide your next journey.")
+            return
 
-    if choice == "universe":
+        print()
+        print("The universe is listening...")
+        sleep(2)
+
+        print("Searching beyond the harmony...")
+        sleep(2)
 
         try:
             spotify = SpotifyClient()
-            song = spotify.discover_universe_song()
+
+            if choice == "universe":
+                song = spotify.discover_universe_song()
+            elif choice == "genre":
+                genre = input("Which genre speaks to you today? ").strip()
+                song = spotify.discover_by_genre(genre)
+            elif choice == "artist":
+                artist = input("Which artist's universe would you like to explore? ").strip()
+                song = spotify.discover_by_artist(artist)
+            elif choice == "album":
+                album = input("Which album holds your message? ").strip()
+                song = spotify.discover_by_album(album)
 
         except Exception as e:
             print("The universe could not connect with Spotify.")
@@ -113,9 +123,18 @@ def main():
             print(f"🎵 Song: {song['name']}")
             print(f"🎤 Artist: {song['artist']}")
 
-        else:
-            print("Your library is empty.")
+            print()
+            another = input(
+                "Would you like to receive another musical message? (y/n): "
+            ).strip().lower()
 
+            if another not in ("yes", "y"):
+                print()
+                print("May the universe guide your next journey.")
+                return
+
+        else:
+            print("The universe could not find a melody for this path.")
 
 
 if __name__ == "__main__":
