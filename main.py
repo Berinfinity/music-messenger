@@ -1,3 +1,4 @@
+from spotify_client import SpotifyClient
 from time import sleep
 
 
@@ -88,9 +89,33 @@ def main():
 
     print("Searching beyond the harmony...")
     sleep(2)
-    
-    print()
-    print(f"Selected option: {choice}")
+
+    if choice == "universe":
+
+        try:
+            spotify = SpotifyClient()
+            song = spotify.discover_universe_song()
+
+        except Exception as e:
+            print("The universe could not connect with Spotify.")
+            print(e)
+            return
+
+        if song:
+            print()
+            print("✨ Your musical message has arrived ✨")
+            print()
+            sleep(2)
+
+            print("The universe has chosen a frequency aligned with you:")
+            print()
+            print(f"🌌 Path: {song['genre']}\n")
+            print(f"🎵 Song: {song['name']}")
+            print(f"🎤 Artist: {song['artist']}")
+
+        else:
+            print("Your library is empty.")
+
 
 
 if __name__ == "__main__":
