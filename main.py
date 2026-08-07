@@ -75,11 +75,20 @@ def main():
     print("Listening to the echoes of the universe...")
     sleep(2)
 
+    choice = choose_music_path()
+
+    if choice == "exit":
+        print()
+        print("May the universe guide your next journey.")
+        return
+
     print()
-    print("A melody is searching for you...")
+    print("The universe is listening...")
     sleep(2)
 
-    choice = choose_music_path()
+    print("Searching beyond the harmony...")
+    sleep(2)
+    
     print()
     print(f"Selected option: {choice}")
 
