@@ -35,6 +35,24 @@ class LyricsClient:
             if line.strip()
         ]
 
+        # Remove duplicate lines.
+        lines = list(dict.fromkeys(lines))
+
+        # Remove very short lines.
+        lines = [
+            line for line in lines
+            if len(line.split()) >= 5
+        ]
+
+        # Remove common background-vocal lines.
+        lines = [
+            line for line in lines
+            if not (
+                line.startswith("(")
+                and line.endswith(")")
+            )
+        ]
+
         if not lines:
             return None
 
