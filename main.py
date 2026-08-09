@@ -1,3 +1,4 @@
+from lyrics_client import LyricsClient
 from spotify_client import SpotifyClient
 from time import sleep
 
@@ -122,6 +123,30 @@ def main():
             print(f"🌌 Path: {song['genre']}\n")
             print(f"🎵 Song: {song['name']}")
             print(f"🎤 Artist: {song['artist']}")
+
+            print()
+
+            wants_lyrics = input(
+                "Would you like a deeper message from this melody? (yes/no): "
+            ).strip().lower()
+
+            if wants_lyrics in ("yes", "y"):
+
+                lyrics_client = LyricsClient()
+
+                message = lyrics_client.get_random_line(
+                    song["artist"],
+                    song["name"]
+                )
+
+                print()
+
+                if message:
+                    print("The universe whispers:")
+                    print()
+                    print(f'🎶 "{message}"')
+                else:
+                    print("The melody keeps its message hidden for now.")
 
             print()
             another = input(
